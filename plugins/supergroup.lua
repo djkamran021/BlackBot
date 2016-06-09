@@ -481,6 +481,90 @@ local function unlock_group_fosh(msg, data, target)
   end
 end
 
+local function lock_group_photo(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_photo_lock = data[tostring(target)]['settings']['photo']
+  if group_photo_lock == 'yes' then
+    return 'Photos is already locked✔'
+  else
+    data[tostring(target)]['settings']['photo'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'Photos has been locked✔'
+  end
+end
+
+local function unlock_group_photo(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_photo_lock = data[tostring(target)]['settings']['photo']
+  if group_photo_lock == 'no' then
+    return 'Photos is not locked❌'
+  else
+    data[tostring(target)]['settings']['photo'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'Photos has been unlocked❌'
+  end
+end
+
+local function lock_group_video(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_video_lock = data[tostring(target)]['settings']['video']
+  if group_video_lock == 'yes' then
+    return 'Video is already locked✔'
+  else
+    data[tostring(target)]['settings']['video'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'Video has been locked✔'
+  end
+end
+
+local function unlock_group_video(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_video_lock = data[tostring(target)]['settings']['video']
+  if group_video_lock == 'no' then
+    return 'Video is not locked❌'
+  else
+    data[tostring(target)]['settings']['video'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'Video has been unlocked❌'
+  end
+end
+
+local function lock_group_audio(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_audio_lock = data[tostring(target)]['settings']['audio']
+  if group_audio_lock == 'yes' then
+    return 'Audio is already locked✔'
+  else
+    data[tostring(target)]['settings']['audio'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'Audio has been locked✔'
+  end
+end
+
+local function unlock_group_audio(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_audio_lock = data[tostring(target)]['settings']['audio']
+  if group_audio_lock == 'no' then
+    return 'Audio is not locked❌'
+  else
+    data[tostring(target)]['settings']['audio'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'Audio has been unlocked❌'
+  end
+end
+ 
 local function lock_group_join(msg, data, target)
   if not is_momod(msg) then
     return
