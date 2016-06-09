@@ -564,6 +564,34 @@ local function unlock_group_audio(msg, data, target)
     return 'Audio has been unlocked❌'
   end
 end
+
+local function lock_group_poker(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_poker_lock = data[tostring(target)]['settings']['poket']
+  if group_poker_lock == 'yes' then
+    return 'Poker (😐) is already locked✔'
+  else
+    data[tostring(target)]['settings']['poker'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'Poker (😐) has been locked✔'
+  end
+end
+
+local function unlock_group_poker(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_poker_lock = data[tostring(target)]['settings']['poker']
+  if group_poker_lock == 'no' then
+    return 'Poker (😐) is not locked❌'
+  else
+    data[tostring(target)]['settings']['poker'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'Poker (😐) has been unlocked❌'
+  end
+end
  
 local function lock_group_join(msg, data, target)
   if not is_momod(msg) then
@@ -655,11 +683,11 @@ local function lock_group_emoji(msg, data, target)
   end
   local group_emoji_lock = data[tostring(target)]['settings']['emoji']
   if group_emoji_lock == 'yes' then
-    return 'Emoji (😐) is already locked✔'
+    return 'Emoji (😂😃😄...) is already locked✔'
   else
     data[tostring(target)]['settings']['emoji'] = 'yes'
     save_data(_config.moderation.data, data)
-    return 'Emoji (😐) has been locked✔'
+    return 'Emoji (😂😃😄...) has been locked✔'
   end
 end
 
@@ -669,11 +697,11 @@ local function unlock_group_emoji(msg, data, target)
   end
   local group_emoji_lock = data[tostring(target)]['settings']['emoji']
   if group_emoji_lock == 'no' then
-    return 'Emoji (😐) is not locked❌'
+    return 'Emoji (😂😃😄...) is not locked❌'
   else
     data[tostring(target)]['settings']['emoji'] = 'no'
     save_data(_config.moderation.data, data)
-    return 'Emoji (😐) has been unlocked❌'
+    return 'Emoji (😂😃😄...) has been unlocked❌'
   end
 end
 
@@ -1131,6 +1159,11 @@ function show_supergroup_settingsmod(msg, target)
 			data[tostring(target)]['settings']['join'] = 'no'
 		end
 	end
+ 	  if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['poker'] then
+			data[tostring(target)]['settings']['poker'] = 'no'
+		end
+	end
 	  if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['fosh'] then
 			data[tostring(target)]['settings']['fosh'] = 'no'
@@ -1184,7 +1217,7 @@ function show_supergroup_settingsmod(msg, target)
   local gp_type = data[tostring(msg.to.id)]['group_type']
   
   local settings = data[tostring(target)]['settings']
-  local text = "\n⛔SuperGroup settings⛔:\n\nبرای قفل کردن دستورات !lock\nبرای باز کردنشان !unlock\n\nℹLock links : "..settings.lock_link.."\nℹLock Photo: "..settings.photo.."\nℹLock Video: "..settings.video.."\nℹLock Audio: "..settings.audio.."\nℹLock contacts: "..settings.lock_contacts.."\nℹLock flood: "..settings.flood.."\n🚫Flood sensitivity : "..NUM_MSG_MAX.."\nℹLock spam: "..settings.lock_spam.."\nℹLock Arabic: "..settings.lock_arabic.."\nℹLock Member: "..settings.lock_member.."\nℹLock RTL: "..settings.lock_rtl.."\nℹLock Tgservice: "..settings.lock_tgservice.."\nℹLock sticker: "..settings.lock_sticker.."\nℹLock Tag(#$): "..settings.tag.."\nℹLock Emoji: "..settings.emoji.."\nℹLock English: "..settings.english.."\nℹLock Fwd: "..settings.fwd.."\nℹLock Reply: "..settings.reply.."\nℹLock Join: "..settings.join.."\nℹLock Username(@): "..settings.username.."\nℹLock Media: "..settings.media.."\nℹLock Fosh: "..settings.fosh.."\nℹLock Leave: "..settings.leave.."\nℹLock Bots: "..bots_protection.."\nℹLock Operator: "..settings.operator.."\n👑Switch Model Etehad: "..settings.etehad.."\n👑Switch Model Normal: "..settings.normal.."\n👑Switch Model Family: "..settings.family.."\n🔐Lock All: "..settings.all.."\n⚠Type: "..gp_type.."\n〽Public: "..settings.public.."\n⛔Strict settings: "..settings.strict.."\n"
+  local text = "\n⛔SuperGroup settings⛔:\n\nبرای قفل کردن دستورات !lock\nبرای باز کردنشان !unlock\n\nℹLock links : "..settings.lock_link.."\nℹLock Photo: "..settings.photo.."\nℹLock Video: "..settings.video.."\nℹLock Audio: "..settings.audio.."nℹLock Poker: "..settings.poker.."\nℹLock contacts: "..settings.lock_contacts.."\nℹLock flood: "..settings.flood.."\n🚫Flood sensitivity : "..NUM_MSG_MAX.."\nℹLock spam: "..settings.lock_spam.."\nℹLock Arabic: "..settings.lock_arabic.."\nℹLock Member: "..settings.lock_member.."\nℹLock RTL: "..settings.lock_rtl.."\nℹLock Tgservice: "..settings.lock_tgservice.."\nℹLock sticker: "..settings.lock_sticker.."\nℹLock Tag(#$): "..settings.tag.."\nℹLock Emoji: "..settings.emoji.."\nℹLock English: "..settings.english.."\nℹLock Fwd: "..settings.fwd.."\nℹLock Reply: "..settings.reply.."\nℹLock Join: "..settings.join.."\nℹLock Username(@): "..settings.username.."\nℹLock Media: "..settings.media.."\nℹLock Fosh: "..settings.fosh.."\nℹLock Leave: "..settings.leave.."\nℹLock Bots: "..bots_protection.."\nℹLock Operator: "..settings.operator.."\n👑Switch Model Etehad: "..settings.etehad.."\n👑Switch Model Normal: "..settings.normal.."\n👑Switch Model Family: "..settings.family.."\n🔐Lock All: "..settings.all.."\n⚠Type: "..gp_type.."\n〽Public: "..settings.public.."\n⛔Strict settings: "..settings.strict.."\n"
   return text
 end
 
@@ -2367,7 +2400,11 @@ local function run(msg, matches)
 			end
 			if matches[2] == 'video' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked video ")
-				return lock_group_tag(msg, data, target)
+				return lock_group_video(msg, data, target)
+			end
+                        if matches[2] == 'poker' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked poker ")
+				return lock_group_poker(msg, data, target)
 			end			
 			if matches[2] == 'audio' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked audio ")
@@ -2560,7 +2597,11 @@ local function run(msg, matches)
 			if matches[2] == 'video' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked video")
 				return unlock_group_video(msg, data, target)
-			end			
+			end
+                        if matches[2] == poker' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked poker")
+				return unlock_group_poker(msg, data, target)
+			end 			
 			if matches[2] == 'audio' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked audio")
 				return unlock_group_audio(msg, data, target)
