@@ -1022,6 +1022,21 @@ function show_supergroup_settingsmod(msg, target)
 			data[tostring(target)]['settings']['fwd'] = 'no'
 		end
 	end
+          if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['photo'] then
+			data[tostring(target)]['settings']['photo'] = 'no'
+		end
+	end 
+          if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['video'] then
+			data[tostring(target)]['settings']['video'] = 'no'
+		end
+	end
+          if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['audio'] then
+			data[tostring(target)]['settings']['audio'] = 'no'
+		end
+	end
 	  if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['reply'] then
 			data[tostring(target)]['settings']['reply'] = 'no'
@@ -1085,7 +1100,7 @@ function show_supergroup_settingsmod(msg, target)
   local gp_type = data[tostring(msg.to.id)]['group_type']
   
   local settings = data[tostring(target)]['settings']
-  local text = "\n⛔SuperGroup settings⛔:\nبرای قفل کردن دستورات !lock\nبرای باز کردنشان !unlock\n\nℹLock links : "..settings.lock_link.."\nℹLock contacts: "..settings.lock_contacts.."\nℹLock flood: "..settings.flood.."\n>🚫Flood sensitivity : "..NUM_MSG_MAX.."\nℹLock spam: "..settings.lock_spam.."\nℹLock Arabic: "..settings.lock_arabic.."\nℹLock Member: "..settings.lock_member.."\nℹLock RTL: "..settings.lock_rtl.."\nℹLock Tgservice: "..settings.lock_tgservice.."\nℹLock sticker: "..settings.lock_sticker.."\nℹLock Tag(#$): "..settings.tag.."\nℹLock Emoji: "..settings.emoji.."\nℹLock English: "..settings.english.."\nℹLock Fwd: "..settings.fwd.."\nℹLock Reply: "..settings.reply.."\nℹLock Join: "..settings.join.."\nℹLock Username(@): "..settings.username.."\nℹLock Media: "..settings.media.."\nℹLock Fosh: "..settings.fosh.."\nℹLock Leave: "..settings.leave.."\nℹLock Bots: "..bots_protection.."\nℹLock Operator: "..settings.operator.."\n👑Switch Model Etehad: "..settings.etehad.."\n👑Switch Model Normal: "..settings.normal.."\n👑Switch Model Family: "..settings.family.."\n🔐Lock All: "..settings.all.."\n⚠Type: "..gp_type.."\n〽Public: "..settings.public.."\n⛔Strict settings: "..settings.strict.."\n"
+  local text = "\n⛔SuperGroup settings⛔:\n\nبرای قفل کردن دستورات !lock\nبرای باز کردنشان !unlock\n\nℹLock links : "..settings.lock_link.."\nℹLock Photo: "..settings.photo.."\nℹLock Video: "..settings.video.."\nℹLock Audio: "..settings.audio.."\nℹLock contacts: "..settings.lock_contacts.."\nℹLock flood: "..settings.flood.."\n🚫Flood sensitivity : "..NUM_MSG_MAX.."\nℹLock spam: "..settings.lock_spam.."\nℹLock Arabic: "..settings.lock_arabic.."\nℹLock Member: "..settings.lock_member.."\nℹLock RTL: "..settings.lock_rtl.."\nℹLock Tgservice: "..settings.lock_tgservice.."\nℹLock sticker: "..settings.lock_sticker.."\nℹLock Tag(#$): "..settings.tag.."\nℹLock Emoji: "..settings.emoji.."\nℹLock English: "..settings.english.."\nℹLock Fwd: "..settings.fwd.."\nℹLock Reply: "..settings.reply.."\nℹLock Join: "..settings.join.."\nℹLock Username(@): "..settings.username.."\nℹLock Media: "..settings.media.."\nℹLock Fosh: "..settings.fosh.."\nℹLock Leave: "..settings.leave.."\nℹLock Bots: "..bots_protection.."\nℹLock Operator: "..settings.operator.."\n👑Switch Model Etehad: "..settings.etehad.."\n👑Switch Model Normal: "..settings.normal.."\n👑Switch Model Family: "..settings.family.."\n🔐Lock All: "..settings.all.."\n⚠Type: "..gp_type.."\n〽Public: "..settings.public.."\n⛔Strict settings: "..settings.strict.."\n"
   return text
 end
 
@@ -1788,7 +1803,7 @@ local function run(msg, matches)
 				resolve_username(username,  callbackres, cbres_extra)
 			else
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested SuperGroup ID")
-				return "\n🚻Your IDs: "..msg.from.id.."\n👥Chat ID: "..msg.to.id.."\n🎈Your Users : "..msg.from.username
+				return "\n🚻Your IDs: "..msg.from.id.."\n👥Chat ID: "..msg.to.id.."\n🎈Your Users : @"..msg.from.username
 			end
 		end
 
@@ -2220,7 +2235,7 @@ local function run(msg, matches)
       end
     
 			     if matches[2] == 'normal' then
-      	local etehad ={
+      	local normal ={
         lock_group_links(msg, data, target),
 		lock_group_tag(msg, data, target),
 		lock_group_spam(msg, data, target),
@@ -2234,7 +2249,7 @@ local function run(msg, matches)
 		lock_group_bots(msg, data, target),
 		lock_group_operator(msg, data, target),
       	}
-      	return lock_group_etehad(msg, data, target), etehad
+      	return lock_group_normal(msg, data, target), normal
       end
 			     if matches[2] == 'family' then
       	local family ={
@@ -2262,6 +2277,18 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked join ")
 				return lock_group_join(msg, data, target)
 			end
+                        if matches[2] == 'photo' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked photo ")
+				return lock_group_photo(msg, data, target)
+			end
+			if matches[2] == 'video' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked video ")
+				return lock_group_tag(msg, data, target)
+			end			
+			if matches[2] == 'audio' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked audio ")
+				return lock_group_audio(msg, data, target)
+			end 
 			if matches[2] == 'tag' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked tag ")
 				return lock_group_tag(msg, data, target)
@@ -2442,6 +2469,18 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked join")
 				return unlock_group_join(msg, data, target)
 			end
+                        if matches[2] == 'photo' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked photo")
+				return unlock_group_photo(msg, data, target)
+			end 
+			if matches[2] == 'video' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked video")
+				return unlock_group_video(msg, data, target)
+			end			
+			if matches[2] == 'audio' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked audio")
+				return unlock_group_audio(msg, data, target)
+			end 
 			if matches[2] == 'tag' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked tag")
 				return unlock_group_tag(msg, data, target)
