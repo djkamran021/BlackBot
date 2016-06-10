@@ -108,10 +108,10 @@ local function pre_process(msg)
 	  if msg.to.type == 'chat' or msg.to.type == 'channel' then
 		if username then
 			savelog(msg.to.id, name_log.." @"..username.." ["..msg.from.id.."] kicked for #spam")
-			send_large_msg(receiver , "اسپم زدن ممنوع است کاربر"..username.."["..msg.from.id.."]\nبه دلیل اسپم \nوضعیت کاربر : اخراج شد")
+			send_large_msg(receiver , "❌اسپم زدن در سوپر گروه ممنوع است❌\n😏اطلاعات کاربر اسپم زده\n\n🔱یوزرنیم کاربر: @"..username.."\n\n👤ایدی کاربر["..msg.from.id.."]\n\n📈وضعیت کاربر : اخراج شد👌🏻😐")
 		else
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] kicked for #spam")
-			send_large_msg(receiver , "Flooding is not allowed here\nName:"..name_log.."["..msg.from.id.."]\nStatus: User kicked")
+			send_large_msg(receiver , "❌اسپم زدن در سوپر گروه ممنوع است❌\n😏اطلاعات کاربر اسپم زده\n😒نام کاربر:"..name_log.."\n👤ایدی کاربر["..msg.from.id.."]\n\n📈وضعیت کاربر : اخراج شد👌🏻😐")
 		end
 	  end
       -- incr it on redis
@@ -135,13 +135,13 @@ local function pre_process(msg)
           local print_name = user_print_name(msg.from):gsub("‮", "")
 		  local name = print_name:gsub("_", "")
           --Send this to that chat
-          send_large_msg("chat#id"..msg.to.id, "User [ "..name.." ]"..msg.from.id.." globally banned (spamming)")
-		  send_large_msg("channel#id"..msg.to.id, "User [ "..name.." ]"..msg.from.id.." شما به دلیل اسپم زدن در سوپر گروه سوپر بن شدید")
+          send_large_msg("chat#id"..msg.to.id, "\n😀نام کاربر : [ "..name.." ]\n👤ایدی کاربر :"..msg.from.id.." کاربر سوپر بن شد👌🏻😐\n😕به دلیل : اسپم زدن در سوپر گروه☦")
+		  send_large_msg("channel#id"..msg.to.id, "User [ "..name.." ]"..msg.from.id.." globally banned (spamming)")
           local GBan_log = 'GBan_log'
 		  local GBan_log =  data[tostring(GBan_log)]
 		  for k,v in pairs(GBan_log) do
 			log_SuperGroup = v
-			gban_text = "User [ "..name.." ] ( @"..username.." )"..msg.from.id.." کاربر عزیز شما در سوپر بن شدید ایدی شما ( "..msg.to.print_name.." ) [ "..msg.to.id.." ] به دلیل اسپم زدن"
+			gban_text = "\n😀نام کاربر : [ "..name.." ]\n👤یوزرنیم کاربر( @"..username.." )\n👤ایدی عددی کاربر"..msg.from.id.."\n〽نام گروه ( "..msg.to.print_name.." )\n👥ایدی گروه[ "..msg.to.id.." ]\n\n(دلیل سوپر بن شدن : (اسپم زدن"
 			--send it to log group/channel
 			send_large_msg(log_SuperGroup, gban_text)
 		  end
