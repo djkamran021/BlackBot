@@ -2493,6 +2493,7 @@ local function run(msg, matches)
 		lock_group_flood(msg, data, target),
 		lock_group_tgservice(msg, data, target),
 		lock_group_sticker(msg, data, target),
+		lock_group_media(msg, data, target),
 		lock_group_contacts(msg, data, target),
 		lock_group_emoji(msg, data, target),
 		lock_group_username(msg, data, target),
@@ -2720,6 +2721,7 @@ local function run(msg, matches)
 		unlock_group_flood(msg, data, target),
 		unlock_group_tgservice(msg, data, target),
 		unlock_group_sticker(msg, data, target),
+		unlock_group_media(msg, data, target),
 		unlock_group_contacts(msg, data, target),
 		unlock_group_emoji(msg, data, target),
 		unlock_group_username(msg, data, target),
@@ -2755,7 +2757,7 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked video")
 				return unlock_group_video(msg, data, target)
 			end
-                        if matches[2] == poker' then
+                        if matches[2] == 'poker' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked poker")
 				return unlock_group_poker(msg, data, target)
 			end 			
