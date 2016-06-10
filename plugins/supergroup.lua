@@ -565,6 +565,90 @@ local function unlock_group_audio(msg, data, target)
   end
 end
 
+local function lock_group_gif(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_gif_lock = data[tostring(target)]['settings']['gif']
+  if group_gif_lock == 'yes' then
+    return 'Gifs is already locked✔'
+  else
+    data[tostring(target)]['settings']['gif'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'Gifs has been locked✔'
+  end
+end
+
+local function unlock_group_gif(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_gif_lock = data[tostring(target)]['settings']['gif']
+  if group_gif_lock == 'no' then
+    return 'Gifs is not locked❌'
+  else
+    data[tostring(target)]['settings']['gif'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'Gifs has been unlocked❌'
+  end
+end
+
+local function lock_group_chat(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_chat_lock = data[tostring(target)]['settings']['chat']
+  if group_chat_lock == 'yes' then
+    return 'Chats Message is already Enabled🔇'
+  else
+    data[tostring(target)]['settings']['chat'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'Chats Message has been Enabled🔇'
+  end
+end
+
+local function unlock_group_chat(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_chat_lock = data[tostring(target)]['settings']['chat']
+  if group_chat_lock == 'no' then
+    return 'Chats Message is not Enabled🔊'
+  else
+    data[tostring(target)]['settings']['chat'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'Chats Message  has been Disabled🔊'
+  end
+end
+
+local function lock_group_chatall(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_chatall_lock = data[tostring(target)]['settings']['chatall']
+  if group_chatall_lock == 'yes' then
+    return 'Chatall =(emoji,sticker,chats,media)\nis already Enabled🔇'
+  else
+    data[tostring(target)]['settings']['chatall'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'Chatall =(emoji,sticker,chats,media)\nhas been Enabled🔇'
+  end
+end
+
+local function unlock_group_chatall(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_chatall_lock = data[tostring(target)]['settings']['chatall']
+  if group_chatall_lock == 'no' then
+    return 'Chatall =(emoji,sticker,chats,media)\nis not Enabled🔊'
+  else
+    data[tostring(target)]['settings']['chatall'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'Chatall =(emoji,sticker,chats,media)\nhas been Disabled🔊'
+  end
+end
+
 local function lock_group_poker(msg, data, target)
   if not is_momod(msg) then
     return
@@ -1125,6 +1209,21 @@ function show_supergroup_settingsmod(msg, target)
 		end
 	end
 	  if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['gif'] then
+			data[tostring(target)]['settings']['gif'] = 'no'
+		end
+	end
+	  if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['chat'] then
+			data[tostring(target)]['settings']['chat'] = 'no'
+		end
+	end
+	  if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['chatall'] then
+			data[tostring(target)]['settings']['chatall'] = 'no'
+		end
+	end
+	  if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['english'] then
 			data[tostring(target)]['settings']['english'] = 'no'
 		end
@@ -1217,7 +1316,7 @@ function show_supergroup_settingsmod(msg, target)
   local gp_type = data[tostring(msg.to.id)]['group_type']
   
   local settings = data[tostring(target)]['settings']
-  local text = "\n⛔SuperGroup settings⛔:\n\nبرای قفل کردن دستورات !lock\nبرای باز کردنشان !unlock\n\nℹLock links : "..settings.lock_link.."\nℹLock Photo: "..settings.photo.."\nℹLock Video: "..settings.video.."\nℹLock Audio: "..settings.audio.."nℹLock Poker: "..settings.poker.."\nℹLock contacts: "..settings.lock_contacts.."\nℹLock flood: "..settings.flood.."\n🚫Flood sensitivity : "..NUM_MSG_MAX.."\nℹLock spam: "..settings.lock_spam.."\nℹLock Arabic: "..settings.lock_arabic.."\nℹLock Member: "..settings.lock_member.."\nℹLock RTL: "..settings.lock_rtl.."\nℹLock Tgservice: "..settings.lock_tgservice.."\nℹLock sticker: "..settings.lock_sticker.."\nℹLock Tag(#$): "..settings.tag.."\nℹLock Emoji: "..settings.emoji.."\nℹLock English: "..settings.english.."\nℹLock Fwd: "..settings.fwd.."\nℹLock Reply: "..settings.reply.."\nℹLock Join: "..settings.join.."\nℹLock Username(@): "..settings.username.."\nℹLock Media: "..settings.media.."\nℹLock Fosh: "..settings.fosh.."\nℹLock Leave: "..settings.leave.."\nℹLock Bots: "..bots_protection.."\nℹLock Operator: "..settings.operator.."\n👑Switch Model Etehad: "..settings.etehad.."\n👑Switch Model Normal: "..settings.normal.."\n👑Switch Model Family: "..settings.family.."\n🔐Lock All: "..settings.all.."\n⚠Type: "..gp_type.."\n〽Public: "..settings.public.."\n⛔Strict settings: "..settings.strict.."\n"
+  local text = "\n⛔SuperGroup settings⛔:\n\nبرای قفل کردن دستورات !lock\nبرای باز کردنشان !unlock\n\nℹLock links : "..settings.lock_link.."\nℹLock Photo: "..settings.photo.."\nℹLock Video: "..settings.video.."\nℹLock Audio: "..settings.audio.."nℹLock Poker: "..settings.poker.."\nℹLock Gifs: "..settings.gif.."\nℹLock contacts: "..settings.lock_contacts.."\nℹLock flood: "..settings.flood.."\n🚫Flood sensitivity : "..NUM_MSG_MAX.."\nℹLock spam: "..settings.lock_spam.."\nℹLock Arabic: "..settings.lock_arabic.."\nℹLock Member: "..settings.lock_member.."\nℹLock RTL: "..settings.lock_rtl.."\nℹLock Tgservice: "..settings.lock_tgservice.."\nℹLock sticker: "..settings.lock_sticker.."\nℹLock Tag(#$): "..settings.tag.."\nℹLock Emoji: "..settings.emoji.."\nℹLock English: "..settings.english.."\nℹLock Fwd: "..settings.fwd.."\nℹLock Reply: "..settings.reply.."\nℹLock Join: "..settings.join.."\nℹLock Username(@): "..settings.username.."\nℹLock Media: "..settings.media.."\nℹLock Fosh: "..settings.fosh.."\nℹLock Leave: "..settings.leave.."\n(Chats supers)\n\n🔊Lock ChatAll: "..settings.chatall.."\n🔊Lock Chat: "..settings.chat.."\n__________\n\nℹLock Bots: "..bots_protection.."\nℹLock Operator: "..settings.operator.."\n👑Switch Model Etehad: "..settings.etehad.."\n👑Switch Model Normal: "..settings.normal.."\n👑Switch Model Family: "..settings.family.."\n🔐Lock All: "..settings.all.."\n⚠Type: "..gp_type.."\n〽Public: "..settings.public.."\n⛔Strict settings: "..settings.strict.."\n"
   return text
 end
 
@@ -2385,7 +2484,34 @@ local function run(msg, matches)
 		lock_group_operator(msg, data, target),
       	}
       	return lock_group_family(msg, data, target), family
-      end   
+      end
+			     if matches[2] == 'chatall' then
+      	local chatall ={
+        lock_group_links(msg, data, target),
+		lock_group_tag(msg, data, target),
+		lock_group_spam(msg, data, target),
+		lock_group_flood(msg, data, target),
+		lock_group_tgservice(msg, data, target),
+		lock_group_sticker(msg, data, target),
+		lock_group_contacts(msg, data, target),
+		lock_group_emoji(msg, data, target),
+		lock_group_username(msg, data, target),
+		lock_group_english(msg, data, target),
+		lock_group_chat(msg, data, target),
+		lock_group_arabic(msg, data, target),
+      	}
+      	return lock_group_chatall(msg, data, target), chatall
+      end
+			     if matches[2] == 'chat' then
+      	local chat ={
+        lock_group_links(msg, data, target),
+		lock_group_tag(msg, data, target),
+		lock_group_english(msg, data, target),
+		lock_group_chat(msg, data, target),
+		lock_group_arabic(msg, data, target),
+      	}
+      	return lock_group_chat(msg, data, target), chat
+      end 
 			if matches[2] == 'links' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked link posting ")
 				return lock_group_links(msg, data, target)
@@ -2461,6 +2587,10 @@ local function run(msg, matches)
 			if matches[2] == 'reply' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked reply")
 				return lock_group_reply(msg, data, target)
+			end
+                        if matches[2] == 'gif' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked gif")
+				return lock_group_gif(msg, data, target)
 			end
 			if matches[2] == 'emoji' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked emoji")
@@ -2581,7 +2711,34 @@ local function run(msg, matches)
 		unlock_group_operator(msg, data, target),
       	}
       	return unlock_group_family(msg, data, target), dfamily
-      end  
+      end
+			     if matches[2] == 'chatall' then
+      	local dchatall ={
+        lock_group_links(msg, data, target),
+		unlock_group_tag(msg, data, target),
+		unlock_group_spam(msg, data, target),
+		unlock_group_flood(msg, data, target),
+		unlock_group_tgservice(msg, data, target),
+		unlock_group_sticker(msg, data, target),
+		unlock_group_contacts(msg, data, target),
+		unlock_group_emoji(msg, data, target),
+		unlock_group_username(msg, data, target),
+		unlock_group_english(msg, data, target),
+		unlock_group_chat(msg, data, target),
+		unlock_group_arabic(msg, data, target),
+      	}
+      	return unlock_group_chatall(msg, data, target), dchatall
+      end
+			     if matches[2] == 'chat' then
+      	local dchat ={
+        lock_group_links(msg, data, target),
+		unlock_group_tag(msg, data, target),
+		unlock_group_english(msg, data, target),
+		unlock_group_chat(msg, data, target),
+		unlock_group_arabic(msg, data, target),
+      	}
+      	return unlock_group_chat(msg, data, target), dchat
+      end 
 			if matches[2] == 'links' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked link posting")
 				return unlock_group_links(msg, data, target)
@@ -2657,6 +2814,10 @@ local function run(msg, matches)
 			if matches[2] == 'reply' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked reply")
 				return unlock_group_reply(msg, data, target)
+			end
+                        if matches[2] == 'gif' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked reply")
+				return unlock_group_gif(msg, data, target)
 			end
 			if matches[2] == 'emoji' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked disabled emoji")
