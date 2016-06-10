@@ -275,7 +275,7 @@ end
 		return
 	end
 
-  if matches[1]:lower() == 'banall' and is_admin1(msg) then -- Global ban
+  if matches[1]:lower() == 'gban' and is_admin1(msg) then -- Global ban
     if type(msg.reply_id) ~="nil" and is_admin1(msg) then
       banall = get_message(msg.reply_id,banall_by_reply, false)
     end
@@ -299,7 +299,7 @@ end
 		resolve_username(username, kick_ban_res, cbres_extra)
       end
   end
-  if matches[1]:lower() == 'unbanall' then -- Global unban
+  if matches[1]:lower() == 'ungban' then -- Global unban
     local user_id = matches[2]
     local chat_id = msg.to.id
       if string.match(matches[2], '^%d+$') then
@@ -326,8 +326,8 @@ end
 
 return {
   patterns = {
-    "^[#!/]([Bb]anall) (.*)$",
-    "^[#!/]([Bb]anall)$",
+    "^[#!/]([Gg]ban) (.*)$",
+    "^[#!/]([Gg]ban)$",
     "^[#!/]([Bb]anlist) (.*)$",
     "^[#!/]([Bb]anlist)$",
     "^[#!/]([Gg]banlist)$",
@@ -336,8 +336,8 @@ return {
 	"^[#!/]([Bb]an)$",
     "^[#!/]([Bb]an) (.*)$",
     "^[#!/]([Uu]nban) (.*)$",
-    "^[#!/]([Uu]nbanall) (.*)$",
-    "^[#!/]([Uu]nbanall)$",
+    "^[#!/]([Uu]ngban) (.*)$",
+    "^[#!/]([Uu]ngban)$",
     "^[#!/]([Kk]ick) (.*)$",
     "^[#!/]([Uu]nban)$",
     "^[#!/]([Ii]d)$",
