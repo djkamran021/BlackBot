@@ -108,10 +108,10 @@ local function pre_process(msg)
 	  if msg.to.type == 'chat' or msg.to.type == 'channel' then
 		if username then
 			savelog(msg.to.id, name_log.." @"..username.." ["..msg.from.id.."] kicked for #spam")
-			send_large_msg(receiver , "Flooding is not allowed here\n@"..username.."\nIds["..msg.from.id.."]\nStatus: User kicked")
+			send_large_msg(receiver , "اسپم زدن ممنوع است کاربر"..username.."["..msg.from.id.."]\nبه دلیل اسپم \nوضعیت کاربر : اخراج شد")
 		else
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] kicked for #spam")
-			send_large_msg(receiver , "Flooding is not allowed here\nName:"..name_log.."\nIds["..msg.from.id.."]\nStatus: User kicked")
+			send_large_msg(receiver , "Flooding is not allowed here\nName:"..name_log.."["..msg.from.id.."]\nStatus: User kicked")
 		end
 	  end
       -- incr it on redis
@@ -136,12 +136,12 @@ local function pre_process(msg)
 		  local name = print_name:gsub("_", "")
           --Send this to that chat
           send_large_msg("chat#id"..msg.to.id, "User [ "..name.." ]"..msg.from.id.." globally banned (spamming)")
-		  send_large_msg("channel#id"..msg.to.id, "User [ "..name.." ]"..msg.from.id.." globally banned (spamming)")
+		  send_large_msg("channel#id"..msg.to.id, "User [ "..name.." ]"..msg.from.id.." شما به دلیل اسپم زدن در سوپر گروه سوپر بن شدید")
           local GBan_log = 'GBan_log'
 		  local GBan_log =  data[tostring(GBan_log)]
 		  for k,v in pairs(GBan_log) do
 			log_SuperGroup = v
-			gban_text = "User [ "..name.." ] ( @"..username.." )"..msg.from.id.." Globally banned from ( "..msg.to.print_name.." ) [ "..msg.to.id.." ] (spamming)"
+			gban_text = "User [ "..name.." ] ( @"..username.." )"..msg.from.id.." کاربر عزیز شما در سوپر بن شدید ایدی شما ( "..msg.to.print_name.." ) [ "..msg.to.id.." ] به دلیل اسپم زدن"
 			--send it to log group/channel
 			send_large_msg(log_SuperGroup, gban_text)
 		  end
