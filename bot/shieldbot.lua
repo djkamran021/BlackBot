@@ -471,159 +471,146 @@ will return group ban list
 	help_text_super =[[
 SuperGroup Commands:
 
-!gpinfo
-Displays general info about the SuperGroup
+!isuper
+نمایش اطلاعات اصلی گروه
 
 !admins
-Returns SuperGroup admins list
+نمایش لیست ادمین های گروه
 
 !owner
-Returns group owner
+نمایش خریدار گروه
 
 !modlist
-Returns Moderators list
+نمایش لیست ناظم ها
 
 !bots
-Lists bots in SuperGroup
+لیست روبات های گروه
 
 !who
-Lists all users in SuperGroup
+لیست اعضای گروه در یک فایل متنی
 
 !block
-Kicks a user from SuperGroup
-*Adds user to blocked list*
-
-!kick
-Kicks a user from SuperGroup
-*Adds user to blocked list*
-
-!ban
-Bans user from the SuperGroup
-
-!unban
-Unbans user from the SuperGroup
+بلاک کردن و کیک کردن فرد
 
 !id
-Return SuperGroup ID or user id
+نمایش ایدی گروه
 *For userID's: !id @username or reply !id*
 
 !id from
-Get ID of user message is forwarded from
+نمایش اطلاعات فردی که پیغام رو فوارد کرده
 
 !kickme
-Kicks user from SuperGroup
+کیک شدن از سوپر گروه
 *Must be unblocked by owner or use join by pm to return*
 
 !setowner
-Sets the SuperGroup owner
+ست کردن کاربر به عنوان خریدار گروه
 
 !promote [username|id]
-Promote a SuperGroup moderator
+اضافه کردن کاربر به لیست ناظم ها
 
 !demote [username|id]
-Demote a SuperGroup moderator
+پاک کردن کاربر از لیست ناظم ها
 
 !setname
-Sets the chat name
+گذاشتن اسم گروه
 
 !setphoto
-Sets the chat photo
+گذاشتن عکس برای گروه
 
 !setrules
-Sets the chat rules
+گذاشتن قوانین برای گروه
 
 !setabout
-Sets the about section in chat info(members list)
+گذاشتن متن درباره برای سوپر گروه(این متن در بخش توضیحات گروه هم نمایش داده میشه)
 
 !save [value] <text>
-Sets extra info for chat
+ذخیره کردن یک متن
 
 !get [value]
-Retrieves extra info for chat by value
+گرفتن متن
 
 !newlink
-Generates a new group link
+ساختن لینک جدید
 
 !link
-Retireives the group link
+گرفتن لینک
 
 !rules
-Retrieves the chat rules
+نمایش قوانین
 
-!lock [links|flood|spam|Arabic|member|rtl|sticker|contacts|strict|tag|username|fwd|reply|fosh|tgservice|leave|join|emoji|english|media|operator]
-Lock group settings
-*rtl: Delete msg if Right To Left Char. is in name*
-*strict: enable strict settings enforcement (violating user will be kicked)*
-*fosh: Delete badword msg*
-*fwd: Delete forward msg*
+!lock [links|flood|spam|Arabic|member|rtl|sticker|contacts|strict|tag|emoji|website|english|photo|audio|video|gif|poker|fwd|reply|chat|chatall|join|user|media|fosh|leave|share|bots|etehad|normal|family|all]
 
-!unlock [links|flood|spam|Arabic|member|rtl|sticker|contacts|strict|tag|username|fwd|reply|fosh|tgservice|leave|join|emoji|english|media|operator]
-Unlock group settings
+قفل کردن لینک گروها-اسپم-متن و اسم های بزرگ -زبان فارسی-تعداد اعضا-کاراکتر های غیر عادی-استیکر-مخاطبین
+دقت کنید اگر گذینه اخری strict روشن باشد کاربر از گروه کیک میشود و پیغام پاک میشه در غیر این صورت فقط پیغام پاک میشود_تگ _اموجی_انگلیسی_وب سایت_عکس_فیلم_اهنگ_گیف_پوکر_فروارد_ریپلای_چت_چت کامل_جوین_لفت _یوزرنیم_شیر اکانت_ربات_فحش_اتحاد_نرمال_خانوادگی_همه تنظیمات_
+
+!unlock [links|flood|spam|Arabic|member|rtl|sticker|contacts|strict|tag|emoji|website|english|photo|audio|video|gif|poker|fwd|reply|chat|chatall|join|user|media|fosh|leave|share|bots|etehad|normal|family|all]
+باز کردن قفل امکانات بالا
 *rtl: Delete msg if Right To Left Char. is in name*
 *strict: disable strict settings enforcement (violating user will not be kicked)*
 
-!mute [all|audio|gifs|photo|video|service]
-mute group message types
-*A "muted" message type is auto-deleted if posted
+!mute [all|audio|gifs|photo|video]
+پاک کردن سریع همه پیغام ها-عکس ها-گیف ها-صدا های ضبط شده-فیلم
 
-!unmute [all|audio|gifs|photo|video|service]
-Unmute group message types
-*A "unmuted" message type is not auto-deleted if posted
+!unmute [all|audio|gifs|photo|video]
+باز کردن قفل امکانات بالا
 
 !setflood [value]
-Set [value] as flood sensitivity
-
-!type [name]
-set type for supergroup
+گذاشتن value به عنوان حساسیت اسپم
 
 !settings
-Returns chat settings
+نمایش تنظیمات گروه
+
+!muteslist
+نمایش نوع پیغام های سایلنت شده
+*A "muted" message type is auto-deleted if posted
+
+!muteuser [username]
+سایلنت کردن یک کاربر خاص در گروه
+فقط خریدار میتونه کسیو سایلنت کنه ولی ناظم ها میتونند فرد را از سایلنتی در بیاورند
 
 !mutelist
-Returns mutes for chat
+نمایش لیست افراد سایلنت شده
 
-!silent [username]
-Mute a user in chat
-*If a muted user posts a message, the message is deleted automaically
-*only owners can mute | mods and owners can unmute
+!clean [rules|about|modlist|mutelist|bots]
+پاک کردن لیست ناظم ها-درباره-لیست سایلنت شده ها-قوانین_ربات های سوپر گروه_
 
-!silentlist
-Returns list of muted users in chat
-
-!banlist
-Returns SuperGroup ban list
-
-!clean [rules|about|modlist|silentlist|filterlist]
-
-!del
-Deletes a message by reply
-
-!filter [word]
-bot Delete word if member send
-
-!unfilter [word]
-Delete word in filter list
-
-!filterlist
-get filter list
-
-!clean msg [value]
 
 !public [yes|no]
-Set chat visibility in pm !chats or !chatlist commands
+نمایش گروه شما در لیست گروها
 
 !res [username]
-Returns users name and id by username
+گرفتن اطلاعت یوزر نیم داده شد
+
+!addword [text]
+ممنوع کردن کلمه در گروه
+
+!remword [text]
+مجاز کردن همان کلمه در گروه
+
 
 !log
-Returns group logs
-*Search for kick reasons using [#RTL|#spam|#lockmember]
+برگرداندن تاریخچه گروه در یک فایل متنی
+
+سرگرمی های ربات را با دستور زیر مشاهده کنید :)
+!helps
+
 
 **You can use "#", "!", or "/" to begin all commands
+شما میتوانید هم از اسلش/مربع/علامت تعجب در اول دستورات استفاده کنید
 *Only owner can add members to SuperGroup
 (use invite link to invite)
+فقط ادمین ها میتونن اعضا به گروه ادد کنند در سوپر گروه(قانون تلگرام)
 *Only moderators and owner can use block, ban, unban, newlink, link, setphoto, setname, lock, unlock, setrules, setabout and settings commands
+فقط ناظم ها و خریدار ها میتوانند دستورات  بالا را اجرا کنند
 *Only owner can use res, setowner, promote, demote, and log commands
+فقط خریدار گروه میتواند دستورات بالا رو اجرا کند
+channel bots : @BLACKTEAMS
+SUDO BOTS: 
+@mehdiisudo
+@MESTERPOKER
+
+دستورات را بطور کامل بخوانید با تشکر از تیم بلاک
 ]],
   }
   serialize_to_file(config, './data/config.lua')
