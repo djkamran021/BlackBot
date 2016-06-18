@@ -211,8 +211,8 @@ return {
     "^plug$",
     "^pl? (+) ([%w_%.%-]+)$",
     "^pl? (-) ([%w_%.%-]+)$",
-    "^pl? (+) ([%w_%.%-]+) (chat)",
-    "^pl? (-) ([%w_%.%-]+) (chat)",
+    "^lang? (+) ([%w_%.%-]+) (chat)",
+    "^lang? (-) ([%w_%.%-]+) (chat)",
     "^p? (*)$" },
   run = run,
   moderated = true, -- set to moderator mode
