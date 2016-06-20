@@ -71,7 +71,7 @@ function clear_commandsbad(msg, cmd_name)
 end
 
 local function run(msg, matches)
-  if matches[2] == 'filter' then
+  if matches[2] == 'addw' then
   if not is_momod(msg) then
    return 'only for moderators'
   end
@@ -80,14 +80,14 @@ local function run(msg, matches)
   local text = addword(msg, name)
   return text
   end
-  if matches[2] == 'filterlist' then
+  if matches[2] == 'words' then
   return list_variablesbad(msg)
   elseif matches[2] == 'clean' then
 if not is_momod(msg) then return '_|_' end
   local asd = '1'
     return clear_commandbad(msg, asd)
-  elseif matches[2] == 'unfilter' or matches[2] == 'rw' then
-   if not is_momod(msg) then return '_|_' end
+  elseif matches[2] == 'rmw' or matches[2] == 'rw' then
+   if not is_momod(msg) then return ':(' end
     return clear_commandsbad(msg, matches[3])
   else
     local name = user_print_name(msg.from)
@@ -99,10 +99,10 @@ end
 return {
   patterns = {
   "^([!/#])(rw) (.*)$",
-  "^([!/#])(filter) (.*)$",
-   "^([!/#])(unfilter) (.*)$",
-    "^([!/#])(filterlist)$",
-    "^([!/#])(clean) filterlist$",
+  "^([!/#])(addw) (.*)$",
+   "^([!/#])(rmw) (.*)$",
+    "^([!/#])(words)$",
+    "^([!/#])(clean) words$",
 "^(.+)$",
 	   
   },
