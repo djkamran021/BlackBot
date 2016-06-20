@@ -206,13 +206,13 @@ if to == 'user' or service or is_admin1(msg) and to == "chat" or to == "channel"
 		send_large_msg("user#id"..user_id, "Added you to chat:\n\n"..group_name.." (ID:"..msg.to.id..")")
 	end
 
-	if matches[1] == 'help' and msg.to.type == 'user' or matches[1] == 'pmhelp' and is_admin1(msg) and msg.to.type ~= 'user' then
+	if matches[1] == 'help' and msg.to.type == 'user' or matches[1] == 'phelp' and is_admin1(msg) and msg.to.type ~= 'user' then
       	savelog(msg.to.id, name_log.." ["..msg.from.id.."] used pm help")
 		text = "Hi!,\nfor see bot command send #superhelp"
      	return text
     end
 
-	if matches[1] == 'superhelp' and is_admin1(msg)then
+	if matches[1] == 'shelp' and is_admin1(msg)then
       	savelog(msg.to.id, name_log.." ["..msg.from.id.."] Used /superhelp")
      	return super_help()
 	elseif matches[1] == 'superhelp' and to == "user" then
@@ -244,8 +244,8 @@ end
 return {
     patterns = {
 	"^[#!/](help)$",
-	"^[#!/](pmhelp)$",
-	"^[#!/](superhelp)$",
+	"^[#!/](phelp)$",
+	"^[#!/](srhelp)$",
     "^[#!/](chats)$",
     "^[#!/](chatlist)$",
     "^[#!/](join) (%d+)$",
