@@ -36,8 +36,11 @@ return {
     patterns = {
         '^[/!#](lock) reply$',
         '^[/!#](unlock) reply$'
+        '^(lock) reply$',
+        '^(unlock) reply$'
     },
     run = run,
     pre_process = pre_process
 }
 end
+--by mehdiisudo
